@@ -70,14 +70,14 @@ return {
 				enable_diagnostics = true,
 				open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
 				open_files_using_relative_paths = false,
-				sort_case_insensitive = false, -- used when sorting files and directories in the tree
+				sort_case_insensitive = true, -- used when sorting files and directories in the tree
 				sort_function = function(a, b)
 					if a.hidden and not b.hidden then
-						return false
+						return false -- a is hidden, b is not, so b comes first
 					elseif not a.hidden and b.hidden then
-						return true
+						return true -- a is not hidden, b is, so a comes first
 					else
-						return a.name < b.name
+						return a.name < b.name -- sort by name if both are hidden or both are not
 					end
 				end, -- custom sort function to place hidden files at the end
 				default_component_configs = {

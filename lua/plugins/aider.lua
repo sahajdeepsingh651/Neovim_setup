@@ -14,6 +14,15 @@
 return {
     "GeorgesAlkhouri/nvim-aider",
     cmd = "Aider",
+    
+    -- Add this function at the top
+    local function sum(a, b)
+        return a + b
+    end
+
+    -- Call the function for demonstration
+    print("Sum of 3 and 5 is: " .. sum(3, 5))
+
     -- Example key mappings for common actions:
     keys = {
         { "<leader>a/", "<cmd>Aider toggle<cr>",       desc = "Toggle Aider" },

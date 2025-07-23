@@ -72,14 +72,18 @@ return {
                 open_files_using_relative_paths = false,
                 sort_case_insensitive = false,                         -- used when sorting files and directories in the tree
                 sort_function = function(a, b)
-                    if a.hidden and not b.hidden then
-                        return true -- a is hidden, b is not, so b comes first
+                    if a.type == "directory" and b.type ~= "directory" then
+                        return true -- a is a directory, b is not, so a comes first
+                    elseif a.type ~= "directory" and b.type == "directory" then
+                        return false -- b is a directory, a is not, so b comes first
+                    elseif a.hidden and not b.hidden then
+                        return true -- a is hidden, b is not, so b comes last
                     elseif not a.hidden and b.hidden then
-                        return false -- a is not hidden, b is, so a comes first
+                        return false -- b is hidden, a is not, so a comes first
                     else
-                        return a.name > b.name -- sort by name if both are hidden or both are not
+                        return a.name > b.name -- sort by name if both are the same type
                     end
-                end,         -- custom sort function to place hidden files at the end
+                end,         -- custom sort function to place folders first, then files, then hidden files
                 default_component_configs = {
                     container = {
                         enable_character_fade = true,

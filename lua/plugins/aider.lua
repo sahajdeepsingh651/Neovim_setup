@@ -11,11 +11,6 @@
 --
 --
 --
-local function sum(a, b)
-    return a + b
-end
-
-print("Sum of 3 and 5 is: " .. sum(3, 5))
 
 return {
     "GeorgesAlkhouri/nvim-aider",
